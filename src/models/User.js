@@ -13,8 +13,6 @@ const UserSchema = new mongoose.Schema(
     vehicles: [String],
     password: {
       type: String,
-      required: true,
-      select: true,
     },
     city: {
       type: String,
