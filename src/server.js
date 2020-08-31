@@ -11,4 +11,4 @@ server.use(cors());
 server.use(express.json());
 server.use(routes);
 
-server.listen(port, () => console.log(`SERVER RUNNING ${port}`));
+server.listen(process.env.PORT || 3030, () => console.log(`SERVER RUNNING ${port}`));
