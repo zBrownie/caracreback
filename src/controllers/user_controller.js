@@ -14,11 +14,11 @@ module.exports = {
       name = null,
       email,
       vehicles = [],
-      password,
+      password = null,
       phoneNumber = null,
       photoUrl = null,
       adress = null,
-      idFacebook = null,
+      id = null,
       idGoogle = null,
     } = request.body;
 
@@ -33,7 +33,7 @@ module.exports = {
         password,
         phoneNumber,
         photoUrl,
-        idFacebook,
+        idFacebook=id,
         idGoogle,
       });
     }
