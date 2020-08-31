@@ -33,7 +33,7 @@ module.exports = {
         password,
         phoneNumber,
         photoUrl,
-        idFacebook=id,
+        idFacebook: id,
         idGoogle,
       });
     }
