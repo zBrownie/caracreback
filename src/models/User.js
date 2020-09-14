@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const VehiclesSchmea = require("./Vehicles");
 
 const UserSchema = new mongoose.Schema(
   {
@@ -10,7 +11,7 @@ const UserSchema = new mongoose.Schema(
       required: true,
       createIndexes: { unique: true },
     },
-    vehicles: [String],
+    vehicles: [Object],
     password: {
       type: String,
     },
