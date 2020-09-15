@@ -60,7 +60,7 @@ module.exports = {
         } else {
           const vehicles = request.body.vehicles;
           if (vehicles) {
-            doc.vehicles.push(vehicles);
+            doc.vehicles = vehicles;
 
             doc.save((err, updateDoc) => {
               if (err) {
@@ -74,8 +74,6 @@ module.exports = {
         }
       }
     });
-
-    // await User.findOneAndUpdate(email, (err, doc) => {})
   },
   async checkout(request, response) {
     const { email } = request.body;
