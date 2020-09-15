@@ -1,6 +1,6 @@
 const { DocumentProvider } = require("mongoose");
 const User = require("../models/User");
-const { checkout } = require("../routes");
+// const { checkout } = require("../routes");
 
 module.exports = {
   async index(request, response) {
@@ -75,11 +75,49 @@ module.exports = {
       }
     });
   },
-  async checkout(request, response) {
-    const { email } = request.body;
-    User.findOne({ email }).then((user) => {
-      if (user) return response.status(200).send({ success: true, data: user });
-      return response.status(200).send({ success: false, data: null });
+  async updateUserInfo(request, response) {
+    const email = request.params.email;
+
+    User.findOne({ email: email }, (err, doc) => {
+      if (err) {
+        console.log(err);
+        return response.send({ success: false, message: "erro request" });
+      } else {
+        if (!doc) {
+          return response.send({
+            success: false,
+            message: "usuario inexistente",
+          });
+        } else {
+          const data = request.body.userData;
+          if (data) {
+            doc.name = data.name;
+            doc.email = data.email;
+            doc.vehicles = data.vehicles;
+            doc.password = data.password;
+            doc.city = data.city;
+            doc.phoneNumber = data.phoneNumber;
+            doc.adress = data.adress;
+            doc.photoUrl = data.photoUrl;
+            doc.idFacebook = data.idFacebook;
+            doc.idGoogle = data.idGoogle;
+
+            doc.save((err, newDoc) => {
+              if (err) {
+                console.log(err);
+                return response.send({
+                  success: false,
+                  message: "erro salvar novos dados",
+                });
+              } else {
+                return response.send({ success: true, userData: newDoc });
+              }
+            });
+          } else {
+            return response.send({ success: false, message: "falta de dados" });
+          }
+        }
+      }
     });
   },
 };
